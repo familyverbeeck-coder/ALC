@@ -1,22 +1,19 @@
-import { createClient } from '@vercel/kv';
+import Redis from 'ioredis';
 
 export default async function handler(request, response) {
     if (request.method !== 'POST') {
         return response.status(405).json({ error: 'Méthode non autorisée' });
     }
 
-    // Connexion directe en utilisant la vraie variable visible sur votre image : KV_REDIS_URL
-    const kv = createClient({
-        url: process.env.KV_REDIS_URL
-    });
-
+    const redis = new Redis(process.env.KV_REDIS_URL);
     const ip = request.headers['x-forwarded-for'] || request.socket.remoteAddress || 'unknown';
     const keyLock = `brute:${ip}`;
 
     try {
-        const tentatives = await kv.get(keyLock);
+        const tentatives = await redis.get(keyLock);
 
-        if (tentatives && tentatives >= 5) {
+        if (tentatives && parseInt(tentatives) >= 5) {
+            await redis.quit();
             return response.status(429).json({ 
                 error: "Trop de tentatives. Votre accès est bloqué pendant 1 minute." 
             });
@@ -25,22 +22,26 @@ export default async function handler(request, response) {
         const { password, dates } = request.body;
         const motDePasseAttendu = process.env.ADMIN_PASSWORD;
 
-        // Correction de la variable (attendu)
         if (password !== motDePasseAttendu) {
             if (!tentatives) {
-                await kv.set(keyLock, 1, { ex: 60 });
+                // Fixe la valeur à 1 et expire après 60 secondes
+                await redis.set(keyLock, 1, 'EX', 60);
             } else {
-                await kv.incr(keyLock);
+                await redis.incr(keyLock);
             }
+            await redis.quit();
             return response.status(401).json({ error: 'Code secret incorrect.' });
         }
 
-        await kv.del(keyLock);
-        await kv.set('dates_reservees', dates);
+        // Si tout est bon, on enregistre sous forme de chaîne de caractères
+        await redis.del(keyLock);
+        await redis.set('dates_reservees', JSON.stringify(dates));
+        
+        await redis.quit();
         return response.status(200).json({ success: true });
         
     } catch (error) {
-        console.error("Erreur de sauvegarde Redis :", error);
+        console.error("Erreur Redis Sauvegarder:", error);
         return response.status(500).json({ error: 'Erreur de base de données.' });
     }
 }
