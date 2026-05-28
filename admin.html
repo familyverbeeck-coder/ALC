@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Console Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/light.css">
+    <style>
+        .admin-box { max-width: 480px; margin: 30px auto; padding: 25px 20px; background: #fff; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); text-align: center; }
+        .alert { padding: 12px; margin-bottom: 20px; border-radius: 4px; font-size: 0.9rem; font-weight: 600; display: none; }
+        .alert-danger { background: #fde8e8; color: #9b1c1c; }
+        .alert-success { background: #def7ec; color: #03543f; }
+        .flatpickr-day { height: 46px !important; line-height: 44px !important; max-width: 46px !important; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="admin-box">
+        <h2 style="font-family: var(--font-serif); margin-bottom: 20px;">Gestion des Réservations</h2>
+        
+        <div id="alertBox" class="alert"></div>
+
+        <!-- Étape 1 : Connexion -->
+        <div id="loginSection">
+            <div class="form-group">
+                <input type="password" id="secretPassword" placeholder="Code secret" style="text-align:center;">
+            </div>
+            <button onclick="login()" class="btn-submit">Accéder au Calendrier</button>
+        </div>
+
+        <!-- Étape 2 : Le Calendrier (caché par défaut) -->
+        <div id="calendarSection" style="display: none;">
+            <p style="font-size:0.85rem; color:#555; margin-bottom:20px;">Sélectionnez les jours occupés du bout du doigt.</p>
+            <div style="margin-bottom: 20px;"><div id="admin-calendar"></div></div>
+            <button onclick="sauvegarder()" class="btn-submit">💾 Enregistrer sur Vercel</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script>
+        let configCalendar = null;
+        let listeDatesSelectionnees = [];
+
+        function showAlert(message, type) {
+            const box = document.getElementById('alertBox');
+            box.innerText = message;
+            box.className = `alert alert-${type}`;
+            box.style.display = 'block';
+        }
+
+        function login() {
+            const pwd = document.getElementById('secretPassword').value;
+            if(!pwd) return;
+            
+            // On charge d'abord les dates existantes pour vérifier l'accès indirect
+            fetch('/api/lire')
+                .then(res => res.json())
+                .then(dates => {
+                    listeDatesSelectionnees = dates;
+                    document.getElementById('loginSection').style.display = 'none';
+                    document.getElementById('calendarSection').style.display = 'block';
+                    document.getElementById('alertBox').style.display = 'none';
+
+                    configCalendar = flatpickr("#admin-calendar", {
+                        inline: true, locale: "fr", minDate: "today", mode: "multiple",
+                        defaultDate: dates,
+                        onChange: function(selectedDates, dateStr, instance) {
+                            listeDatesSelectionnees = selectedDates.map(d => instance.formatDate(d, "Y-m-d"));
+                        },
+                        locale: { firstDayOfWeek: 1 }
+                    });
+                });
+        }
+
+        function sauvegarder() {
+            const pwd = document.getElementById('secretPassword').value;
+            
+            fetch('/api/sauvegarder', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ password: pwd, dates: listeDatesSelectionnees })
+            })
+            .then(async res => {
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error);
+                showAlert("Disponibilités synchronisées !", "success");
+            })
+            .catch(err => {
+                showAlert(err.message, "danger");
+            });
+        }
+    </script>
+</body>
+</html>

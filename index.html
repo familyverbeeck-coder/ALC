@@ -31,7 +31,7 @@
                 <li><a href="#tarifs">Tarifs</a></li>
                 <li><a href="#dispos">Disponibilités</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="tel:0651987000" class="btn-call">📞 Appeler</a></li>
+                <li><a href="tel:03XXabstractXX" class="btn-call">📞 Appeler</a></li>
             </ul>
 
             <button class="burger" id="burgerMenu" aria-label="Menu" aria-expanded="false">
@@ -45,11 +45,11 @@
     <!-- BANNIÈRE PRINCIPALE -->
     <section class="hero" id="gite">
         <div class="hero-content">
-            <h1>Vivez l'Authenticité d'un village</h1>
-            <p>Un séjour paisible au cœur du Jura</p>
+            <h1>Vivez l'Authenticité d'une Demeure de Charme</h1>
+            <p>Un séjour paisible et raffiné au cœur du Jura</p>
             <div class="hero-actions">
-                <a href="tel:0651987000" class="btn-call btn-large">Réserver par Téléphone</a>
-                <a href="sms:+33651987000?body=Bonjour,%20je%20souhaite%20réserver%20le%20gîte%20Autrefois%20la%20Cure..." class="btn-sms btn-large">Envoyer un SMS</a>
+                <a href="tel:03XXabstractXX" class="btn-call btn-large">Réserver par Téléphone</a>
+                <a href="sms:+33600000000?body=Bonjour,%20je%20souhaite%20réserver%20le%20gîte%20Autrefois%20la%20Cure..." class="btn-sms btn-large">Envoyer un SMS</a>
             </div>
         </div>
     </section>
@@ -84,7 +84,7 @@
         <h2>Une Réservation Simple & Personnalisée</h2>
         <p>Afin de vous garantir un accueil sur-mesure, nous gérons les réservations en direct.</p>
         
-        <div class="phone-display">06.51.98.70.00</div>
+        <div class="phone-display">03.XX.XX.XX.XX</div>
 
         <div class="form-container">
             <h3>Une Question ?</h3>
@@ -108,7 +108,7 @@
         </div>
     </section>
 
-    <!-- Scripts et Connexion API distante -->
+    <!-- Scripts de fonctionnement -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
     <script>
@@ -116,6 +116,7 @@
             // Menu Mobile toggle
             const burger = document.getElementById('burgerMenu');
             const navMenu = document.getElementById('navMenu');
+            
             burger.addEventListener('click', () => {
                 const isExpanded = burger.getAttribute('aria-expanded') === 'true';
                 burger.setAttribute('aria-expanded', !isExpanded);
@@ -123,19 +124,17 @@
                 burger.classList.toggle('toggle');
             });
 
-            // Fermeture automatique du menu au clic
+            // Fermeture automatique du menu au clic sur un lien
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.addEventListener('click', () => {
                     navMenu.classList.remove('active');
                     burger.classList.remove('toggle');
+                    burger.setAttribute('aria-expanded', 'false');
                 });
             });
 
-            // ⚠️ REMPLACEZ CETTE URL PAR CELLE DE VOTRE SERVEUR PHP (INFINITYFREE)
-            const urlDistantJson = 'https://autrefois-la-cure.kesug.com/api.php';
-
-            // Chargement asynchrone des données du calendrier
-            fetch(urlDistantJson + '?t=' + new Date().getTime())
+            // Interrogation sécurisée de l'API interne Vercel
+            fetch('/api/lire?t=' + new Date().getTime())
                 .then(response => response.json())
                 .then(datesReservees => {
                     flatpickr("#inline-calendar", {
@@ -147,8 +146,8 @@
                         locale: { firstDayOfWeek: 1 }
                     });
                 }).catch(err => {
-                    console.error("Erreur de synchronisation du calendrier distant:", err);
-                    // Chargement d'un calendrier vide par sécurité si le serveur distant ne répond pas
+                    console.error("Erreur d'initialisation du calendrier :", err);
+                    // Affichage d'un calendrier par défaut vide si la base de données est inaccessible
                     flatpickr("#inline-calendar", { inline: true, locale: "fr", minDate: "today" });
                 });
         });
