@@ -1,0 +1,340 @@
+/* --- CONFIGURATION & THÈME CHIC --- */
+:root {
+    --gold: #c5a880;
+    --gold-hover: #b3946c;
+    --slate: #2c3e50;
+    --cream: #fbf9f6;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- BOUTONS --- */
+.btn-call, .btn-sms {
+    padding: 12px 25px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-call {
+    background-color: var(--gold);
+    color: var(--white);
+}
+
+.btn-call:hover {
+    background-color: var(--gold-hover);
+    transform: translateY(-2px);
+}
+
+.btn-sms {
+    background-color: var(--white);
+    color: var(--slate);
+    border: 1px solid var(--gold);
+}
+
+.btn-sms:hover {
+    background-color: var(--cream);
+    transform: translateY(-2px);
+}
+
+.btn-large {
+    font-size: 1rem;
+    padding: 15px 30px;
+}
+
+/* --- HEADER & MENU --- */
+header {
+    background-color: var(--white);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--slate);
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.logo span {
+    display: block;
+    font-size: 0.75rem;
+    font-family: var(--font-sans);
+    font-weight: 300;
+    color: var(--gold);
+    letter-spacing: 4px;
+    margin-top: 2px;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+    align-items: center;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover { color: var(--gold); }
+
+.burger {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.burger div {
+    width: 25px;
+    height: 2px;
+    background-color: var(--slate);
+    transition: all 0.3s ease;
+}
+
+/* --- HERO BANNER --- */
+.hero {
+    height: 65vh;
+    min-height: 500px;
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('https://autrefois-la-cure.kesug.com/449900076.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+    padding: 20px;
+}
+
+.hero-content { max-width: 800px; }
+
+.hero h1 {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 35px;
+    font-weight: 300;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+/* --- GRILLE TARIFS --- */
+.info-section {
+    max-width: 1100px;
+    margin: -60px auto 60px auto;
+    position: relative;
+    z-index: 10;
+    padding: 0 20px;
+}
+
+.grid-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: var(--white);
+    padding: 45px 35px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.03);
+    text-align: center;
+    border-top: 3px solid var(--gold);
+}
+
+.card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--slate);
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 2.4rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 15px;
+}
+
+.price span { font-size: 1rem; color: #777; font-weight: 300; }
+
+/* --- SECTIONS CALENDRIER & FORMULAIRES --- */
+.calendar-section, .booking-cta {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.calendar-container, .form-container {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 4px;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.01);
+}
+
+.calendar-section h3, .booking-cta h2, .form-container h3 {
+    font-family: var(--font-serif);
+    color: var(--slate);
+    margin-bottom: 15px;
+}
+
+.calendar-section h3 { font-size: 2rem; }
+.booking-cta h2 { font-size: 2.5rem; }
+
+.calendar-legend {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.legend-busy {
+    width: 12px;
+    height: 12px;
+    background-color: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.phone-display {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--slate);
+    letter-spacing: 2px;
+    margin: 20px 0 40px 0;
+}
+
+.form-container { text-align: left; max-width: 600px; margin: 0 auto; }
+.form-container p { text-align: center; font-size: 0.9rem; margin-bottom: 25px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #e2e8f0;
+    background: #fafafa;
+    border-radius: 4px;
+    font-family: var(--font-sans);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    background: var(--white);
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: var(--slate);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-submit:hover { background-color: #1a252f; }
+
+/* --- ARCHITECTURE INTERNE FLATPICKR LUXE --- */
+.flatpickr-calendar { background: transparent !important; box-shadow: none !important; border: none !important; margin: 0 auto; }
+.flatpickr-day.flatpickr-disabled {
+    color: #b0b0b0 !important;
+    background: #f5f5f5 !important;
+    text-decoration: line-through;
+}
+
+/* --- ADAPTATION MOBILE EN SCREEN --- */
+@media (max-width: 968px) {
+    .hero h1 { font-size: 2.5rem; }
+    .nav-menu {
+        position: fixed;
+        top: 80px;
+        right: -100%;
+        background-color: var(--white);
+        width: 100%;
+        height: calc(100vh - 80px);
+        flex-direction: column;
+        padding: 40px;
+        gap: 30px;
+        transition: right 0.4s cubic-bezier(0.1, 0.9, 0.2, 1);
+        box-shadow: 0 15px 20px rgba(0,0,0,0.05);
+    }
+    .nav-menu.active { right: 0; }
+    .burger { display: flex; }
+    .burger.toggle div:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+    .burger.toggle div:nth-child(2) { opacity: 0; }
+    .burger.toggle div:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
+}
+
+@media (max-width: 500px) {
+    .hero h1 { font-size: 2rem; }
+    .booking-cta h2 { font-size: 1.8rem; }
+    .phone-display { font-size: 1.6rem; }
+    .calendar-container, .form-container { padding: 25px 15px; }
+}

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <title>Autrefois la Cure | Demeure de Charme à Bonnefontaine</title>
+    
+    <!-- Polices & Styles Externes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/light.css">
+    
+    <!-- Liaison avec le style global -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- BARRE DE NAVIGATION -->
+    <header>
+        <nav class="nav-container">
+            <a href="#" class="logo" aria-label="Accueil Autrefois la Cure">
+                Autrefois la Cure
+                <span>Bonnefontaine</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#gite">Le Gîte</a></li>
+                <li><a href="#tarifs">Tarifs</a></li>
+                <li><a href="#dispos">Disponibilités</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="tel:0651987000" class="btn-call">📞 Appeler</a></li>
+            </ul>
+
+            <button class="burger" id="burgerMenu" aria-label="Menu" aria-expanded="false">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+        </nav>
+    </header>
+
+    <!-- BANNIÈRE PRINCIPALE -->
+    <section class="hero" id="gite">
+        <div class="hero-content">
+            <h1>Vivez l'Authenticité d'une Demeure de Charme</h1>
+            <p>Un séjour paisible et raffiné au cœur du Jura</p>
+            <div class="hero-actions">
+                <a href="tel:0651987000" class="btn-call btn-large">Réserver par Téléphone</a>
+                <a href="sms:+33651987000?body=Bonjour,%20je%20souhaite%20réserver%20le%20gîte%20Autrefois%20la%20Cure..." class="btn-sms btn-large">Envoyer un SMS</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION TARIFS -->
+    <section class="info-section" id="tarifs">
+        <div class="grid-cards">
+            <div class="card">
+                <h3>Le Séjour</h3>
+                <div class="price">99€ <span>/ nuit</span></div>
+                <p>Profitez de l'intégralité de la demeure historique, de son jardin arboré et de ses prestations d'exception.</p>
+            </div>
+            <div class="card">
+                <h3>Option Confort</h3>
+                <div class="price">25€ <span>/ séjour</span></div>
+                <p>Location complète des draps de lit de qualité supérieure et serviettes de bain de maison incluses.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALENDRIER DE DISPONIBILITÉS -->
+    <section class="calendar-section" id="dispos">
+        <div class="calendar-container">
+            <h3>Disponibilités du Gîte</h3>
+            <div class="calendar-legend"><span class="legend-busy"></span> Dates réservées</div>
+            <div id="inline-calendar"></div>
+        </div>
+    </section>
+
+    <!-- ZONE DE CONTACT -->
+    <section class="booking-cta" id="contact">
+        <h2>Une Réservation Simple & Personnalisée</h2>
+        <p>Afin de vous garantir un accueil sur-mesure, nous gérons les réservations en direct.</p>
+        
+        <div class="phone-display">06.51.98.70.00</div>
+
+        <div class="form-container">
+            <h3>Une Question ?</h3>
+            <p>Laissez-nous un message, nous vous rappelons rapidement.</p>
+            
+            <form action="contact.php" method="POST" class="contact-form">
+                <div class="form-group">
+                    <input type="text" name="nom" required placeholder="Votre nom" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" required placeholder="Votre adresse email" autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="telephone" required placeholder="Votre numéro de téléphone" autocomplete="tel">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="4" required placeholder="Votre message..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Envoyer la demande</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Scripts et Connexion API distante -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/fr.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Menu Mobile toggle
+            const burger = document.getElementById('burgerMenu');
+            const navMenu = document.getElementById('navMenu');
+            burger.addEventListener('click', () => {
+                const isExpanded = burger.getAttribute('aria-expanded') === 'true';
+                burger.setAttribute('aria-expanded', !isExpanded);
+                navMenu.classList.toggle('active');
+                burger.classList.toggle('toggle');
+            });
+
+            // Fermeture automatique du menu au clic
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    burger.classList.remove('toggle');
+                });
+            });
+
+            // ⚠️ REMPLACEZ CETTE URL PAR CELLE DE VOTRE SERVEUR PHP (INFINITYFREE)
+            const urlDistantJson = 'https://autrefois-la-cure.kesug.com/dates.json';
+
+            // Chargement asynchrone des données du calendrier
+            fetch(urlDistantJson + '?t=' + new Date().getTime())
+                .then(response => response.json())
+                .then(datesReservees => {
+                    flatpickr("#inline-calendar", {
+                        inline: true,
+                        locale: "fr",
+                        minDate: "today",
+                        showMonths: window.innerWidth > 768 ? 2 : 1,
+                        disable: datesReservees,
+                        locale: { firstDayOfWeek: 1 }
+                    });
+                }).catch(err => {
+                    console.error("Erreur de synchronisation du calendrier distant:", err);
+                    // Chargement d'un calendrier vide par sécurité si le serveur distant ne répond pas
+                    flatpickr("#inline-calendar", { inline: true, locale: "fr", minDate: "today" });
+                });
+        });
+    </script>
+</body>
+</html>
