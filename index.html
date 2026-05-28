@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <title>Autrefois la Cure | Demeure de Charme à Bonnefontaine</title>
+    <title>Autrefois la Cure | Gîte de Charme à Bonnefontaine</title>
     
     <!-- Polices & Styles Externes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,7 @@
             
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#gite">Le Gîte</a></li>
+                <li><a href="#galerie">Photos</a></li>
                 <li><a href="#tarifs">Tarifs</a></li>
                 <li><a href="#dispos">Disponibilités</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -45,8 +46,8 @@
     <!-- BANNIÈRE PRINCIPALE -->
     <section class="hero" id="gite">
         <div class="hero-content">
-            <h1>Vivez l'Authenticité d'une Demeure de Charme</h1>
-            <p>Un séjour paisible et raffiné au cœur du Jura</p>
+            <h1>Un Gîte Chaleureux dans une Maison de Caractère</h1>
+            <p>Un séjour au calme et au vert pour se ressourcer dans le Jura</p>
             <div class="hero-actions">
                 <a href="tel:03XXabstractXX" class="btn-call btn-large">Réserver par Téléphone</a>
                 <a href="sms:+33600000000?body=Bonjour,%20je%20souhaite%20réserver%20le%20gîte%20Autrefois%20la%20Cure..." class="btn-sms btn-large">Envoyer un SMS</a>
@@ -54,31 +55,16 @@
         </div>
     </section>
 
-    <!-- SECTION TARIFS -->
-    <section class="info-section" id="tarifs">
-        <div class="grid-cards">
-            <div class="card">
-                <h3>Le Séjour</h3>
-                <div class="price">99€ <span>/ nuit</span></div>
-                <p>Profitez de l'intégralité de la demeure historique, de son jardin arboré et de ses prestations d'exception.</p>
-            </div>
-            <div class="card">
-                <h3>Option Confort</h3>
-                <div class="price">25€ <span>/ séjour</span></div>
-                <p>Location complète des draps de lit de qualité supérieure et serviettes de bain de maison incluses.</p>
-            </div>
-        </div>
-    </section>
-
+    <!-- SECTION GALERIE PHOTO ACCORDÉON -->
     <section class="gallery-section" id="galerie">
-        <h2>Découvrez la Demeure</h2>
-        <p class="gallery-subtitle">Un aperçu de votre futur séjour en images</p>
+        <h2>Visite en Images</h2>
+        <p class="gallery-subtitle">Découvrez le gîte, le jardin et l'ambiance de la maison</p>
         
         <button id="toggleGalleryBtn" class="btn-sms" aria-expanded="false">✨ Afficher les photos</button>
 
         <div id="galleryGrid" class="gallery-grid">
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" alt="Le Salon" loading="lazy"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600" alt="La Chambre Royale" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600" alt="La Chambre principale" loading="lazy"></div>
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600" alt="La Cuisine" loading="lazy"></div>
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600" alt="Le Jardin" loading="lazy"></div>
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="La Salle de Bain" loading="lazy"></div>
@@ -86,7 +72,23 @@
             
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600" alt="Coin Lecture" loading="lazy"></div>
             <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600" alt="La Terrasse" loading="lazy"></div>
-            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600" alt="Détail Décoration" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600" alt="Détail de la maison" loading="lazy"></div>
+        </div>
+    </section>
+
+    <!-- SECTION TARIFS -->
+    <section class="info-section" id="tarifs">
+        <div class="grid-cards">
+            <div class="card">
+                <h3>La Nuitée</h3>
+                <div class="price">99€ <span>/ nuit</span></div>
+                <p>Profitez de toute la maison et de son jardin arboré en totale indépendance.</p>
+            </div>
+            <div class="card">
+                <h3>Option Draps & Linges</h3>
+                <div class="price">25€ <span>/ séjour</span></div>
+                <p>Pour voyager léger, nous vous préparons les lits faits à l'arrivée et fournissons les serviettes de bain.</p>
+            </div>
         </div>
     </section>
 
@@ -101,33 +103,34 @@
 
     <!-- ZONE DE CONTACT -->
     <section class="booking-cta" id="contact">
-        <h2>Une Réservation Simple & Personnalisée</h2>
-        <p>Afin de vous garantir un accueil sur-mesure, nous gérons les réservations en direct.</p>
+        <h2>Une Réservation Simple & Directe</h2>
+        <p>Pour vous accueillir au mieux, nous gérons les demandes directement, sans intermédiaire.</p>
         
         <div class="phone-display">03.XX.XX.XX.XX</div>
 
         <div class="form-container">
-            <h3>Une Question ?</h3>
-            <p>Laissez-nous un message, nous vous rappelons rapidement.</p>
+            <h3>Des questions ? Envie de réserver ?</h3>
+            <p>Laissez-nous un mot ci-dessous, on vous répond ou on vous rappelle très vite.</p>
             
             <form action="https://formsubmit.co/48d20839eb20946ebc8c3b51d19f3665" method="POST" class="contact-form">
-    <input type="text" name="_subject" style="display:none;" value="Nouveau message - Autrefois la Cure">
-    <input type="text" name="_honey" style="display:none;"> <input type="hidden" name="_next" value="https://autrefoislacure.vercel.app/#contact">
+                <input type="text" name="_subject" style="display:none;" value="Nouveau message - Autrefois la Cure">
+                <input type="text" name="_honey" style="display:none;"> 
+                <input type="hidden" name="_next" value="https://autrefoislacure.vercel.app/#contact">
 
-    <div class="form-group">
-        <input type="text" name="nom" required placeholder="Votre nom" autocomplete="name">
-    </div>
-    <div class="form-group">
-        <input type="email" name="email" required placeholder="Votre adresse email" autocomplete="email">
-    </div>
-    <div class="form-group">
-        <input type="tel" name="telephone" required placeholder="Votre numéro de téléphone" autocomplete="tel">
-    </div>
-    <div class="form-group">
-        <textarea name="message" rows="4" required placeholder="Votre message..."></textarea>
-    </div>
-    <button type="submit" class="btn-submit">Envoyer la demande</button>
-</form>
+                <div class="form-group">
+                    <input type="text" name="nom" required placeholder="Votre nom" autocomplete="name">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" required placeholder="Votre adresse email" autocomplete="email">
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="telephone" required placeholder="Votre numéro de téléphone" autocomplete="tel">
+                </div>
+                <div class="form-group">
+                    <textarea name="message" rows="4" required placeholder="Votre message (dates souhaitées, nombre de personnes...)" style="font-family: inherit;"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Envoyer le message</button>
+            </form>
         </div>
     </section>
 
@@ -170,9 +173,9 @@
                     });
                 }).catch(err => {
                     console.error("Erreur d'initialisation du calendrier :", err);
-                    // Affichage d'un calendrier par défaut vide si la base de données est inaccessible
                     flatpickr("#inline-calendar", { inline: true, locale: "fr", minDate: "today" });
                 });
+
             // Gestion de l'affichage de la galerie à la demande
             const toggleBtn = document.getElementById('toggleGalleryBtn');
             const galleryGrid = document.getElementById('galleryGrid');
