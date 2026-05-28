@@ -51,28 +51,38 @@
         }
 
         function login() {
-            const pwd = document.getElementById('secretPassword').value;
-            if(!pwd) return;
-            
-            // On charge d'abord les dates existantes pour vérifier l'accès indirect
-            fetch('/api/lire')
-                .then(res => res.json())
-                .then(dates => {
-                    listeDatesSelectionnees = dates;
-                    document.getElementById('loginSection').style.display = 'none';
-                    document.getElementById('calendarSection').style.display = 'block';
-                    document.getElementById('alertBox').style.display = 'none';
+    const pwd = document.getElementById('secretPassword').value;
+    if(!pwd) return;
+    
+    fetch('/api/lire')
+        .then(async res => {
+            // Si le serveur répond avec une erreur (ex: 500), on arrête tout proprement
+            if (!res.ok) {
+                const texteErreur = await res.text();
+                throw new Error("Le serveur KV n'est pas encore lié ou configuré.");
+            }
+            return res.json();
+        })
+        .then(dates => {
+            listeDatesSelectionnees = dates;
+            document.getElementById('loginSection').style.display = 'none';
+            document.getElementById('calendarSection').style.display = 'block';
+            document.getElementById('alertBox').style.display = 'none';
 
-                    configCalendar = flatpickr("#admin-calendar", {
-                        inline: true, locale: "fr", minDate: "today", mode: "multiple",
-                        defaultDate: dates,
-                        onChange: function(selectedDates, dateStr, instance) {
-                            listeDatesSelectionnees = selectedDates.map(d => instance.formatDate(d, "Y-m-d"));
-                        },
-                        locale: { firstDayOfWeek: 1 }
-                    });
-                });
-        }
+            configCalendar = flatpickr("#admin-calendar", {
+                inline: true, locale: "fr", minDate: "today", mode: "multiple",
+                defaultDate: dates,
+                onChange: function(selectedDates, dateStr, instance) {
+                    listeDatesSelectionnees = selectedDates.map(d => instance.formatDate(d, "Y-m-d"));
+                },
+                locale: { firstDayOfWeek: 1 }
+            });
+        })
+        .catch(err => {
+            showAlert("Erreur de connexion au serveur Vercel. Vérifiez le lien Storage KV.", "danger");
+            console.error(err);
+        });
+}
 
         function sauvegarder() {
             const pwd = document.getElementById('secretPassword').value;
