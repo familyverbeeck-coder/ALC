@@ -309,6 +309,74 @@ header {
     text-decoration: line-through;
 }
 
+/* --- STYLE DE LA GALERIE --- */
+.gallery-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.gallery-section h2 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--slate);
+    margin-bottom: 5px;
+}
+
+.gallery-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+#toggleGalleryBtn {
+    margin: 0 auto 30px auto;
+    display: inline-flex;
+    font-family: var(--font-sans);
+}
+
+/* Grille masquée par défaut avec transition */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 15px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0, 1, 0, 1); /* Effet accordéon fluide */
+}
+
+/* Classe activée en JavaScript */
+.gallery-grid.open {
+    max-height: 5000px; /* Grande valeur pour laisser filer le contenu */
+    transition: max-height 0.8s ease-in-out;
+}
+
+.gallery-item {
+    overflow: hidden;
+    border-radius: 4px;
+    height: 220px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    cursor: pointer;
+}
+
+/* Petit effet de survol haut de gamme */
+.gallery-item img:hover {
+    transform: scale(1.04);
+}
+
+@media (max-width: 500px) {
+    .gallery-section h2 { font-size: 1.8rem; }
+    .gallery-item { height: 180px; }
+}
+
 /* --- ADAPTATION MOBILE EN SCREEN --- */
 @media (max-width: 968px) {
     .hero h1 { font-size: 2.5rem; }
