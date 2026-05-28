@@ -70,6 +70,26 @@
         </div>
     </section>
 
+    <section class="gallery-section" id="galerie">
+        <h2>Découvrez la Demeure</h2>
+        <p class="gallery-subtitle">Un aperçu de votre futur séjour en images</p>
+        
+        <button id="toggleGalleryBtn" class="btn-sms" aria-expanded="false">✨ Afficher les photos</button>
+
+        <div id="galleryGrid" class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" alt="Le Salon" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=600" alt="La Chambre Royale" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600" alt="La Cuisine" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=600" alt="Le Jardin" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600" alt="La Salle de Bain" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=600" alt="Vue Extérieure" loading="lazy"></div>
+            
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600" alt="Coin Lecture" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?w=600" alt="La Terrasse" loading="lazy"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=600" alt="Détail Décoration" loading="lazy"></div>
+        </div>
+    </section>
+
     <!-- CALENDRIER DE DISPONIBILITÉS -->
     <section class="calendar-section" id="dispos">
         <div class="calendar-container">
@@ -153,6 +173,23 @@
                     // Affichage d'un calendrier par défaut vide si la base de données est inaccessible
                     flatpickr("#inline-calendar", { inline: true, locale: "fr", minDate: "today" });
                 });
+            // Gestion de l'affichage de la galerie à la demande
+            const toggleBtn = document.getElementById('toggleGalleryBtn');
+            const galleryGrid = document.getElementById('galleryGrid');
+
+            toggleBtn.addEventListener('click', () => {
+                const isOpen = galleryGrid.classList.contains('open');
+                
+                if (isOpen) {
+                    galleryGrid.classList.remove('open');
+                    toggleBtn.innerText = '✨ Afficher les photos';
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    galleryGrid.classList.add('open');
+                    toggleBtn.innerText = '❌ Fermer la galerie';
+                    toggleBtn.setAttribute('aria-expanded', 'true');
+                }
+            });
         });
     </script>
 </body>
